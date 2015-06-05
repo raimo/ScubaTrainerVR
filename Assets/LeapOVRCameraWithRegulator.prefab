@@ -68,6 +68,7 @@ GameObject:
   - 75: {fileID: 7582960}
   - 114: {fileID: 11441380}
   - 114: {fileID: 11416272}
+  - 82: {fileID: 8212160}
   m_Layer: 0
   m_Name: LeapOVRCameraWithRegulator
   m_TagString: Untagged
@@ -140,6 +141,24 @@ GameObject:
   - 95: {fileID: 9587376}
   m_Layer: 0
   m_Name: MessageBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &136050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 428860}
+  - 33: {fileID: 3346856}
+  - 23: {fileID: 2396656}
+  - 95: {fileID: 9513626}
+  m_Layer: 0
+  m_Name: LPI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +279,7 @@ GameObject:
   - 23: {fileID: 2313442}
   - 102: {fileID: 10294616}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: MessageField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +295,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 5.05999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 428860}
   - {fileID: 405214}
   - {fileID: 498598}
   - {fileID: 480266}
@@ -292,7 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403202}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &410768
 Transform:
   m_ObjectHideFlags: 1
@@ -322,6 +342,18 @@ Transform:
   - {fileID: 447556}
   m_Father: {fileID: 498598}
   m_RootOrder: 2
+--- !u!4 &428860
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136050}
+  m_LocalRotation: {x: -.645087063, y: -.289590746, z: -.289590776, w: .645086944}
+  m_LocalPosition: {x: -.405000001, y: 0, z: .275000006}
+  m_LocalScale: {x: .169268474, y: .0246101469, z: .244387448}
+  m_Children: []
+  m_Father: {fileID: 403202}
+  m_RootOrder: 0
 --- !u!4 &431136
 Transform:
   m_ObjectHideFlags: 1
@@ -402,7 +434,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184812}
   m_LocalRotation: {x: -.500000119, y: .5, z: -.5, w: .49999994}
-  m_LocalPosition: {x: 11.3800001, y: 1, z: -1.09000003}
+  m_LocalPosition: {x: 11.3800001, y: .699999988, z: -1.09000003}
   m_LocalScale: {x: .0299999993, y: .100000001, z: .100000001}
   m_Children: []
   m_Father: {fileID: 431136}
@@ -442,7 +474,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403202}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &498598
 Transform:
   m_ObjectHideFlags: 1
@@ -459,7 +491,7 @@ Transform:
   - {fileID: 473880}
   - {fileID: 431136}
   m_Father: {fileID: 403202}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!20 &2045198
 Camera:
   m_ObjectHideFlags: 1
@@ -740,6 +772,30 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &2396656
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136050}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 73105197d35c74cd0be0b8d24d8f7057, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!23 &2399158
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -785,6 +841,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174034}
   m_Mesh: {fileID: 4300008, guid: d0c278f7e030a4b67813be4f90fa0a33, type: 3}
+--- !u!33 &3346856
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136050}
+  m_Mesh: {fileID: 4300000, guid: 19084169152974e9e8ede32bd4494364, type: 3}
 --- !u!33 &3352346
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -846,6 +909,92 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!82 &8212160
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116180}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!95 &9513626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136050}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 19084169152974e9e8ede32bd4494364, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9587376
 Animator:
   serializedVersion: 3
@@ -894,7 +1043,7 @@ TextMesh:
   m_CharacterSize: 1.02999997
   m_LineSpacing: 1
   m_Anchor: 0
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 30
   m_FontStyle: 0
@@ -948,6 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  messageField: {fileID: 10294616}
 --- !u!114 &11430896
 MonoBehaviour:
   m_ObjectHideFlags: 1
