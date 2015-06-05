@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour {
 
 	private Dictionary<State, string> stateMessages = new Dictionary<State, string>	{
 		{State.INFLATE_BCD_ENTIRELY,
-			"Welcome to Scuba Diving Crash Course for Leap Motion VR! Start off by inflating your BCD completely."},
+			"Welcome to the Scuba Diving Crash Course for Leap Motion VR! Start off by fully inflating your BCD."},
 		{State.HOLD_DURING_GIANT_STRIDE, 
 			"Hold the regulator in your mouth to keep it still during the giant stride entrance to deep water."},
 		{State.GO_GO, 
@@ -45,9 +45,7 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// TODO use this when BCD inflate is ready
-		//state = State.INFLATE_BCD_ENTIRELY;
-		state = State.HOLD_DURING_GIANT_STRIDE;
+		state = State.INFLATE_BCD_ENTIRELY;
 	}
 	
 	// Update is called once per frame

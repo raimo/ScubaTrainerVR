@@ -11,10 +11,15 @@ public class PutOnRegulator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		regulator.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (gameState.state == GameState.State.HOLD_DURING_GIANT_STRIDE && !regulator.activeSelf) {
+			regulator.SetActive (false);
+		}
 		if (regulatorMoving) {
 			if (secondsBehind < 6) {
 				regulator.transform.Translate (0, Time.deltaTime*0.08f, -Time.deltaTime*0.02f);
