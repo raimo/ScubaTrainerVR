@@ -14,15 +14,30 @@ public class GameState : MonoBehaviour {
 		SIGNAL_DESCENT, // activated in PutOnRegulator.cs
 		VENT_BCD_A_BIT_TO_START_DESCENT, // activated in Diver.cs & PutOnRegulator.cs, whichever happens first
 		YOURE_AT_THE_BOTTOM, // TODO
-		SWIM_AROUND_FOR_A_BIT, // TODO
+		SIGNAL_ASCENT, // TODO
 		VENT_AIR_FREQUENTLY_DURING_ASCENT, // activated in Diver.cs
 		YOURE_AT_THE_SURFACE, // activated in Diver.cs
 		FAILURE // NOT USED SINCE THIS IS A SAFETY TRAINER
 	};
 
+
+
+	public AudioSource inflateBcdEntirely;
+	public AudioSource holdDuringGiantStride;
+	public AudioSource goGo;
+	public AudioSource signalDescent;
+	public AudioSource ventBcdABitToStartDescent;
+	public AudioSource youreAtTheBottom;
+	public AudioSource signalAscent;
+	public AudioSource ventAirFrequentlyDuringAscent;
+	public AudioSource youreAtTheSurface;
+    public AudioSource failure;
+
+
+
 	private Dictionary<State, string> stateMessages = new Dictionary<State, string>	{
 		{State.INFLATE_BCD_ENTIRELY,
-			"Welcome to the Scuba Diving Crash Course for Leap Motion VR! Start off by fully inflating your BCD."},
+			"Welcome to the Scuba Diving Crash Course for Leap Motion VR! Start off by fully inflating your BCD (left)."},
 		{State.HOLD_DURING_GIANT_STRIDE, 
 			"Hold the regulator in your mouth to keep it still during the giant stride entrance to deep water."},
 		{State.GO_GO, 
@@ -30,9 +45,9 @@ public class GameState : MonoBehaviour {
 		{State.VENT_BCD_A_BIT_TO_START_DESCENT, 
 			"Vent your BCD a bit to start descending using the Low Pressure Inflator (LPI), but be ready to inflate it frequently as the water pressure and air density increases."},
 		{State.YOURE_AT_THE_BOTTOM, 
-			"You’re at the bottom! Signal “ascent” by holding your thumb upwards to start ascending with a small kick with your fins."},
-		{State.SWIM_AROUND_FOR_A_BIT, 
-			"Swim around for a bit. Become comfortable with reading the air, depth, and compass on your dive computer or dive gauge."},
+			"You’re at the bottom! Swim around for a bit. Become comfortable with reading the air, depth, and compass on your dive computer or dive gauge."},
+		{State.SIGNAL_ASCENT, 
+			"Signal “ascent” by holding your thumb upwards to start ascending with a small kick with your fins."},
 		{State.VENT_AIR_FREQUENTLY_DURING_ASCENT, 
 			"Vent air frequently during your ascent as the air expands while the pressure decreases."},
 		{State.YOURE_AT_THE_SURFACE,
@@ -41,16 +56,34 @@ public class GameState : MonoBehaviour {
 			"Sorry, you lost the game. Please try again after reading diver's handbook."}
 	};
 	public State state;
+	public State prevState;
+	public GameObject messageFieldBox;
 	public TextMesh messageField;
 
 	// Use this for initialization
 	void Start () {
+		messageFieldBox.active = false;
+        StartCoroutine(WelcomeMessage());
+	}
+
+
+	private IEnumerator WelcomeMessage() {
+		yield return new WaitForSeconds(5.0f);
 		state = State.INFLATE_BCD_ENTIRELY;
+		inflateBcdEntirely.Play ();
+	}
+
+	private IEnumerator HideMessage() {
+		yield return new WaitForSeconds(10.0f);
+		messageFieldBox.active = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		showCurrentMessage ();
+		if (prevState != state) {
+			showCurrentMessage ();
+		}
+		prevState = state;
 	}
 
 	public void AdvanceState (State nextState) {
@@ -59,8 +92,10 @@ public class GameState : MonoBehaviour {
 
 	public void showCurrentMessage () {
 		try {
+			messageFieldBox.active = true;
 			messageField.text = formatText(stateMessages [state], messageField, 40);
 			Debug.Log (stateMessages [state]);
+            StartCoroutine(HideMessage());
 		}  catch(KeyNotFoundException e) {
 			Debug.Log (state);
 		}
