@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameState : MonoBehaviour {
+    public bool showDebugMessages = true;
 
 	// All the game states:
 
@@ -59,7 +60,8 @@ public class GameState : MonoBehaviour {
 
 	public void showCurrentMessage () {
 		try {
-			Debug.Log (stateMessages [state]);
+            if(showDebugMessages)
+    			Debug.Log (stateMessages [state]);
 		}  catch(KeyNotFoundException e) {
 			Debug.Log (state);
 		}
