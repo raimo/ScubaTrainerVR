@@ -43,6 +43,7 @@ public class Diver : MonoBehaviour {
     public bool isSurfaced = false;
     public bool isBottomed = false;
     public float ascentRate = 0;
+    public int BCDPercentFull = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -100,6 +101,7 @@ public class Diver : MonoBehaviour {
         isSurfaced = AtSurface ();
         isBottomed = AtBottom ();
         ascentRate = GetAscentRate ();
+        BCDPercentFull = GetBCDPercentFull ();
 
     }
     void SetNormal () 
@@ -147,6 +149,9 @@ public class Diver : MonoBehaviour {
 
     public void inflateBC(){
         CurrentBCDVolume += BCDFillRate * Time.deltaTime;
+        if (CurrentBCDVolume / atm > MaxBCDVolume)
+            CurrentBCDVolume = MaxBCDVolume * atm;
+        
     }
 
     public void deflateBC(){
@@ -214,5 +219,9 @@ public class Diver : MonoBehaviour {
         }
 
         return average/ascentSamples.Length;
+    }
+
+    public int GetBCDPercentFull(){
+        return (int)(CurrentBCDVolume / atm / MaxBCDVolume * 100);
     }
 }
