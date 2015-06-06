@@ -175,10 +175,22 @@ public class Diver : MonoBehaviour {
         float terrainOffset = -Terrain.activeTerrain.transform.position.y;
         Vector3 pos = transform.position;
         float height = Terrain.activeTerrain.SampleHeight(transform.position);
-        if (Mathf.Abs (pos.y + (terrainOffset - height)) < 4)
+        if (Mathf.Abs (pos.y + (terrainOffset - height)) < 4) {
+            if (gameState.state == GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT) {
+                gameState.AdvanceState (GameState.State.YOURE_AT_THE_BOTTOM);
+                StartCoroutine(GoBackUp());
+            }
             return true;
+        }
         return false;
     }
+
+	private IEnumerator GoBackUp() {
+		yield return new WaitForSeconds(9.0f);
+        gameState.AdvanceState (GameState.State.SIGNAL_ASCENT);
+		yield return new WaitForSeconds(6.0f);
+        gameState.AdvanceState (GameState.State.VENT_AIR_FREQUENTLY_DURING_ASCENT);
+	}
 
     public bool AtSurface(){
         if (transform.position.y > SeaLevel - 1) {

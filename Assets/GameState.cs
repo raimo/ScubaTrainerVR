@@ -32,7 +32,7 @@ public class GameState : MonoBehaviour {
 	public AudioSource youreAtTheSurface;
     public AudioSource failure;
 
-
+	public GameObject platform;
 
 	private Dictionary<State, string> stateMessages = new Dictionary<State, string>	{
 		{State.INFLATE_BCD_ENTIRELY,
@@ -90,6 +90,7 @@ public class GameState : MonoBehaviour {
 		if (state == State.HOLD_DURING_GIANT_STRIDE) {
 			holdDuringGiantStride.Play ();
 		} else if (state == State.GO_GO) {
+			platform.SetActive(false);
 			goGo.Play ();
 		} else if (state == State.VENT_BCD_A_BIT_TO_START_DESCENT) {
 			ventBcdABitToStartDescent.Play ();

@@ -28,7 +28,7 @@ GameObject:
   - 95: {fileID: 9599366}
   - 136: {fileID: 13637702}
   - 23: {fileID: 2399158}
-  - 114: {fileID: 11415630}
+  - 114: {fileID: 11463922}
   m_Layer: 0
   m_Name: Regulator
   m_TagString: Untagged
@@ -65,10 +65,10 @@ GameObject:
   - 114: {fileID: 11494446}
   - 114: {fileID: 11407882}
   - 54: {fileID: 5465444}
-  - 75: {fileID: 7582960}
   - 114: {fileID: 11441380}
   - 114: {fileID: 11416272}
   - 81: {fileID: 8133662}
+  - 136: {fileID: 13638502}
   m_Layer: 0
   m_Name: LeapOVRCameraWithRegulator
   m_TagString: Untagged
@@ -88,6 +88,22 @@ GameObject:
   - 23: {fileID: 2358602}
   m_Layer: 0
   m_Name: Cylinder_001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &123624
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417032}
+  - 114: {fileID: 11412938}
+  m_Layer: 0
+  m_Name: RegulatorLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,6 +138,7 @@ GameObject:
   - 33: {fileID: 3306878}
   - 136: {fileID: 13693420}
   - 23: {fileID: 2366714}
+  - 114: {fileID: 11405840}
   m_Layer: 0
   m_Name: InflateButton
   m_TagString: Untagged
@@ -437,6 +454,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 498598}
   m_RootOrder: 1
+--- !u!4 &417032
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 428632}
+  m_Father: {fileID: 498598}
+  m_RootOrder: 4
 --- !u!4 &428632
 Transform:
   m_ObjectHideFlags: 1
@@ -444,16 +474,16 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111010}
   m_LocalRotation: {x: -.593699872, y: 0, z: 0, w: .804686546}
-  m_LocalPosition: {x: 0, y: -.174999997, z: .407999992}
-  m_LocalScale: {x: .100000001, y: .099999994, z: .100000001}
+  m_LocalPosition: {x: 0, y: -.175000191, z: .407999992}
+  m_LocalScale: {x: .100000001, y: .0999999866, z: .100000001}
   m_Children:
   - {fileID: 471516}
   - {fileID: 452560}
   - {fileID: 445592}
   - {fileID: 464286}
   - {fileID: 447556}
-  m_Father: {fileID: 498598}
-  m_RootOrder: 2
+  m_Father: {fileID: 417032}
+  m_RootOrder: 0
 --- !u!4 &428860
 Transform:
   m_ObjectHideFlags: 1
@@ -481,7 +511,7 @@ Transform:
   m_Children:
   - {fileID: 471138}
   m_Father: {fileID: 498598}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!4 &445592
 Transform:
   m_ObjectHideFlags: 1
@@ -577,7 +607,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498598}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &480266
 Transform:
   m_ObjectHideFlags: 1
@@ -639,9 +669,9 @@ Transform:
   m_Children:
   - {fileID: 463820}
   - {fileID: 410768}
-  - {fileID: 428632}
   - {fileID: 473880}
   - {fileID: 431136}
+  - {fileID: 417032}
   m_Father: {fileID: 403202}
   m_RootOrder: 2
 --- !u!20 &2045198
@@ -1184,17 +1214,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!75 &7582960
-ConstantForce:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116180}
-  m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!81 &8133662
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1341,6 +1360,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &11405840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8422e1f2d344e5f801ed0e175faa87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: {fileID: 11416272}
 --- !u!114 &11407882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1361,15 +1392,15 @@ MonoBehaviour:
   freezeTimeWarp: 0
   resetTrackerOnLoad: 1
   monoscopic: 0
---- !u!114 &11415630
+--- !u!114 &11412938
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111010}
+  m_GameObject: {fileID: 123624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefa2ad230a904fde88db4faaadbb08f, type: 3}
+  m_Script: {fileID: 11500000, guid: f11a18091b19b46c1b7ac23e17090c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   regulator: {fileID: 111010}
@@ -1385,10 +1416,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1920b06fe28454d46a6c97d42ec18d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showDebugMessages: 1
   inflateBcdEntirely: {fileID: 0}
   holdDuringGiantStride: {fileID: 0}
   goGo: {fileID: 0}
-  signalDescent: {fileID: 0}
   ventBcdABitToStartDescent: {fileID: 0}
   youreAtTheBottom: {fileID: 0}
   signalAscent: {fileID: 0}
@@ -1482,7 +1513,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalFogColor: {r: .5, g: .5, b: .5, a: .5}
+  normalFogDensity: .00300000003
   underwaterFogColor: {r: .219999999, g: .649999976, b: .769999981, a: .5}
+  underwaterFogDensity: .0199999996
   waterPlane: {fileID: 0}
   SeaLevel: 0
   WaterWeight: 1.01999998
@@ -1493,13 +1526,16 @@ MonoBehaviour:
   StaticBodyVolume: 75
   MaxLungVolume: 6
   MaxBCDVolume: 25
+  BCDFillRate: 20
   CurrentLungVolume: 0
   CurrentBCDVolume: 0
-  CurrentWetsuitAirVolume: 0
   currentBouyancy: 0
   atm: 1
   currentVolume: 0
   gameState: {fileID: 11416272}
+  isSurfaced: 0
+  isBottomed: 0
+  ascentRate: 0
 --- !u!114 &11445206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1560,6 +1596,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageMode: 0
+--- !u!114 &11463922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefa2ad230a904fde88db4faaadbb08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regulator: {fileID: 111010}
+  gameState: {fileID: 11416272}
 --- !u!114 &11474342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1599,6 +1648,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &13638502
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13662518
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1619,8 +1681,8 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129388}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   m_Radius: .5
   m_Height: 2
   m_Direction: 1
