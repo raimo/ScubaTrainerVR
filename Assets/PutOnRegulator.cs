@@ -11,26 +11,28 @@ public class PutOnRegulator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		regulator.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (gameState.state == GameState.State.HOLD_DURING_GIANT_STRIDE && !regulator.activeSelf) {
+			regulator.SetActive (false);
+		}
 		if (regulatorMoving) {
-			if (secondsBehind < 9) {
+			if (secondsBehind < 6) {
 				regulator.transform.Translate (0, Time.deltaTime*0.08f, -Time.deltaTime*0.02f);
 				secondsBehind += Time.deltaTime;
 			} else {
 				regulatorMoving = false;
-				if (gameState.state == GameState.State.SIGNAL_DESCENT) {
-					gameState.AdvanceState (GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT);
-				}
+                gameState.AdvanceState (GameState.State.GO_GO);
 			}
 		}
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone")) && gameState.state == GameState.State.HOLD_DURING_GIANT_STRIDE) {
-			gameState.AdvanceState (GameState.State.SIGNAL_DESCENT);
 			regulatorPosition = regulator.transform.position;
 			regulatorMoving = true;
 			secondsBehind = 0;
