@@ -12,7 +12,6 @@ public class GameState : MonoBehaviour {
 		INFLATE_BCD_ENTIRELY, // TODO activate this at start when we get the player to stay on top of the dock, and hook HOLD_DURING_GIANT_STRIDE when BCD is full. 
 		HOLD_DURING_GIANT_STRIDE, // activated at start
 		GO_GO, // when ready to jump
-		SIGNAL_DESCENT, // activated in PutOnRegulator.cs
 		VENT_BCD_A_BIT_TO_START_DESCENT, // activated in Diver.cs & PutOnRegulator.cs, whichever happens first
 		YOURE_AT_THE_BOTTOM, // TODO
 		SIGNAL_ASCENT, // TODO
@@ -26,7 +25,6 @@ public class GameState : MonoBehaviour {
 	public AudioSource inflateBcdEntirely;
 	public AudioSource holdDuringGiantStride;
 	public AudioSource goGo;
-	public AudioSource signalDescent;
 	public AudioSource ventBcdABitToStartDescent;
 	public AudioSource youreAtTheBottom;
 	public AudioSource signalAscent;
@@ -89,6 +87,23 @@ public class GameState : MonoBehaviour {
 
 	public void AdvanceState (State nextState) {
 		state = nextState;
+		if (state == State.HOLD_DURING_GIANT_STRIDE) {
+			holdDuringGiantStride.Play ();
+		} else if (state == State.GO_GO) {
+			goGo.Play ();
+		} else if (state == State.VENT_BCD_A_BIT_TO_START_DESCENT) {
+			ventBcdABitToStartDescent.Play ();
+		} else if (state == State.YOURE_AT_THE_BOTTOM) {
+			youreAtTheBottom.Play ();
+		} else if (state == State.SIGNAL_ASCENT) {
+			signalAscent.Play ();
+		} else if (state == State.VENT_AIR_FREQUENTLY_DURING_ASCENT) {
+			ventAirFrequentlyDuringAscent.Play ();
+		} else if (state == State.YOURE_AT_THE_SURFACE) {
+			youreAtTheSurface.Play ();
+		} else if (state == State.FAILURE) {
+			failure.Play ();
+		} 
 	}
 
 	public void showCurrentMessage () {

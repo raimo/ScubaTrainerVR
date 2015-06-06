@@ -122,7 +122,7 @@ public class Diver : MonoBehaviour {
         //RenderSettings.fogColor = underwaterFogColor;
         //RenderSettings.fogDensity = underwaterFogDensity;
         physicsBody.useGravity = false;
-        if (gameState.state == GameState.State.SIGNAL_DESCENT) {
+        if (gameState.state == GameState.State.GO_GO) {
             gameState.AdvanceState (GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT);
         }
     }
