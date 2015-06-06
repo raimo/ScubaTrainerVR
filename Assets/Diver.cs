@@ -147,7 +147,7 @@ public class Diver : MonoBehaviour {
         if (speed > 0) {
             physicsBody.AddForce (transform.forward * speed * 40 * Time.deltaTime, ForceMode.Impulse);
         } else {
-            physicsBody.AddForce (Vector3.up * speed * 40 * Time.deltaTime, ForceMode.Impulse);
+            physicsBody.AddForce (Vector3.back * speed * 40 * Time.deltaTime, ForceMode.Impulse);
         }
     }
 
@@ -176,8 +176,8 @@ public class Diver : MonoBehaviour {
             inflateBC ();
         if (Input.GetKey (KeyCode.Slash))
             dropWeightBelt ();
-        if (Input.GetKey (KeyCode.UpArrow))
-            moveForward ();
+        if (Input.GetKey (KeyCode.Z))
+            AutoCompensate ();
     }
 
     public bool AtBottom(){
@@ -212,7 +212,7 @@ public class Diver : MonoBehaviour {
         for (int i = 1; i < ascentSamples.Length; i++) {
             ascentSamples [i] = ascentSamples [i - 1];
         }
-                ascentSamples[ascentSamples.Length - 1] = ((transform.position.y - lastDepth) / Time.deltaTime) * 60; //Meters/minute safe rate is about 10 
+        ascentSamples[ascentSamples.Length - 1] = ((transform.position.y - lastDepth) / Time.deltaTime) * 60; //Meters/minute safe rate is about 10 
         lastDepth = transform.position.y;
     }
 
@@ -227,5 +227,10 @@ public class Diver : MonoBehaviour {
 
     public int GetBCDPercentFull(){
         return (int)(CurrentBCDVolume / atm / MaxBCDVolume * 100);
+    }
+
+    public void AutoCompensate(){
+        float delta = (BodyWeight + EquipmentWeight + WeightBelt) - currentBouyancy;
+        CurrentBCDVolume += delta * atm;
     }
 }
