@@ -40,7 +40,7 @@ public class GameState : MonoBehaviour {
 		{State.HOLD_DURING_GIANT_STRIDE, 
 			"Hold the regulator in your mouth to keep it still during the giant stride entrance to deep water."},
 		{State.GO_GO, 
-			"Great! Now off we go! Rememober to signal “descent” to your buddies by pointing your thumb downwards."},
+			"Great! Now off we go! Remember to signal “descent” to your buddies by pointing your thumb downwards."},
 		{State.VENT_BCD_A_BIT_TO_START_DESCENT, 
 			"Vent your BCD a bit to start descending using the Low Pressure Inflator (LPI), but be ready to inflate it frequently as the water pressure and air density increases."},
 		{State.YOURE_AT_THE_BOTTOM, 

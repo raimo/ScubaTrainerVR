@@ -56,6 +56,10 @@ public class Diver : MonoBehaviour {
         normalFogDensity = RenderSettings.fogDensity;
 
 	}
+
+	public bool isBCDFull() {
+		return CurrentBCDVolume / atm >= MaxBCDVolume;
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -64,7 +68,7 @@ public class Diver : MonoBehaviour {
             atm = 1 - (transform.position.y - SeaLevel)/ 10;
             if(atm < 1) atm = 1;
 
-            if (CurrentBCDVolume / atm > MaxBCDVolume)
+            if (isBCDFull())
                 CurrentBCDVolume = MaxBCDVolume * atm;
             
             currentVolume = StaticBodyVolume + (CurrentLungVolume + CurrentBCDVolume + MaxWetsuitAirVolume) / atm;
