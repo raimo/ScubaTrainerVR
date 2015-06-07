@@ -25,11 +25,15 @@ public class SwimController : MonoBehaviour {
                 physicsBody.AddForceAtPosition (swimVelocity, hand.transform.position, ForceMode.Acceleration);
             }
         }
-        if (Vector3.Dot (transform.up, Vector3.up) < .9) {
+        if (Vector3.Dot (transform.up, Vector3.up) < 1.0) {
             Vector3 horizontal = new Vector3 (transform.up.x, 0, transform.up.z);
             physicsBody.AddRelativeTorque (horizontal * rightingForce * Time.deltaTime, ForceMode.Impulse);
         }
         physicsBody.AddForce (totalVelocity * Time.deltaTime, ForceMode.VelocityChange);
         totalVelocity = physicsBody.velocity * glideFactor;
+
+        if (transform.position.y > 0) {
+            physicsBody.velocity = new Vector3 (physicsBody.velocity.x, physicsBody.velocity.y * .6f, physicsBody.velocity.z);
+        }
 	}
 }

@@ -307,8 +307,8 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 184394, guid: 535608151977f43c5843e728e5d81a88, type: 2}
   m_PrefabInternal: {fileID: 1133565008}
---- !u!64 &882533478
-MeshCollider:
+--- !u!65 &882533478
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -317,8 +317,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 4300006, guid: ba6a41dc489914734857bb5924eb70ad, type: 3}
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1012492345 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118014, guid: 430f73ff8310d4fff8daf379814fc972, type: 2}
@@ -443,6 +443,10 @@ Prefab:
       value: 
       objectReference: {fileID: 13400000, guid: cf63880488ec29f43a759ecd9c6c5123,
         type: 2}
+    - target: {fileID: 411544, guid: 535608151977f43c5843e728e5d81a88, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 535608151977f43c5843e728e5d81a88, type: 2}
   m_IsPrefabParent: 0
@@ -490,6 +494,7 @@ MonoBehaviour:
   normalFogDensity: .00300000003
   underwaterFogColor: {r: .810000002, g: .930000007, b: .370000005, a: .5}
   underwaterFogDensity: .0199999996
+  isUnderwater: 0
 --- !u!4 &1164445233
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,23 +1082,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ccbeaea5a640a5b0bdb116bf46439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalFogColor: {r: .5, g: .5, b: .5, a: .5}
-  normalFogDensity: .00300000003
-  underwaterFogColor: {r: .196042389, g: .342474043, b: .544117689, a: .501960814}
-  underwaterFogDensity: .0199999996
-  waterPlane: {fileID: 882533473}
   SeaLevel: 0
   WaterWeight: 1.01999998
   BodyWeight: 86
-  EquipmentWeight: 10
-  WeightBelt: 8
-  MaxWetsuitAirVolume: 8
-  StaticBodyVolume: 75
+  EquipmentWeight: 8
+  WeightBelt: 12
+  MaxWetsuitAirVolume: 12
+  StaticBodyVolume: 86
   MaxLungVolume: 6
   MaxBCDVolume: 40
   BCDFillRate: 20
   CurrentLungVolume: 6
-  CurrentBCDVolume: 25
+  CurrentBCDVolume: 0
   currentBouyancy: 0
   atm: 1
   currentVolume: 0

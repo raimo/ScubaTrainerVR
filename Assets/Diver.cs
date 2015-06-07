@@ -5,11 +5,6 @@ public class Diver : MonoBehaviour {
     private bool isUnderwater = false;
     private bool isSwimming = false;
     private bool isFloating = false;
-    public Color normalFogColor = new Color (0.5f, 0.5f, 0.5f, 0.5f);
-    public float normalFogDensity = .003f;
-    public Color underwaterFogColor = new Color (0.81f, 0.93f, 0.37f, 0.5f);
-    public float underwaterFogDensity = .02f;
-    public GameObject waterPlane = null;
 
     public float SeaLevel = 0;
 
@@ -22,7 +17,7 @@ public class Diver : MonoBehaviour {
     public float StaticBodyVolume = 75f; //Litre
     public float MaxLungVolume = 6f; //Litre
     //Airtank?
-    public float MaxBCDVolume = 25f; //Litre
+    public float MaxBCDVolume = 40f; //Litre
     public float BCDFillRate = 20f; //Litres/second
 
     public float CurrentLungVolume = 6;
@@ -34,6 +29,7 @@ public class Diver : MonoBehaviour {
     //private ConstantForce bouyancy = null;
     private Rigidbody physicsBody = null;
     private CapsuleCollider capsule = null;
+    private SwimController swimController = null;
 
     //inspection variables
     public float currentBouyancy = 0;
@@ -51,9 +47,8 @@ public class Diver : MonoBehaviour {
         physicsBody = gameObject.GetComponent<Rigidbody> ();
         physicsBody.centerOfMass = new Vector3 (0, -1, 0);
         capsule  = gameObject.GetComponent<CapsuleCollider> ();
+        swimController = gameObject.GetComponent<SwimController> ();
         CurrentLungVolume = MaxLungVolume;
-        normalFogColor = RenderSettings.fogColor;
-        normalFogDensity = RenderSettings.fogDensity;
 
 	}
 
@@ -111,9 +106,8 @@ public class Diver : MonoBehaviour {
     void SetNormal () 
     {
         //Debug.Log("Normal");
-        //RenderSettings.fogColor = normalFogColor;
-        //RenderSettings.fogDensity = normalFogDensity;
         physicsBody.useGravity = true;
+        swimController.rightingForce = 250;
         isFloating = true;
         if (gameState.state == GameState.State.VENT_AIR_FREQUENTLY_DURING_ASCENT) {
             gameState.AdvanceState (GameState.State.YOURE_AT_THE_SURFACE);
@@ -125,8 +119,7 @@ public class Diver : MonoBehaviour {
     {
         //Debug.Log("Underwater");
         isSwimming = true;
-        //RenderSettings.fogColor = underwaterFogColor;
-        //RenderSettings.fogDensity = underwaterFogDensity;
+        swimController.rightingForce = 150;
         physicsBody.useGravity = false;
         if (gameState.state == GameState.State.GO_GO) {
             gameState.AdvanceState (GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT);
