@@ -100,6 +100,18 @@ public abstract class HandModel : MonoBehaviour {
     return Vector3.forward;
   }
 
+    /** Calculates the direction vector of the hand relative to the controller.
+  * @returns A Vector3 representing the direction of the hand relative to the controller.
+  */
+    public Vector3 GetPalmVelocity() {
+        if (controller_ != null && hand_ != null) {
+            float speed = hand_.PalmVelocity.Magnitude;
+            Vector3 velocityUnit = controller_.transform.TransformDirection(hand_.PalmVelocity.Normalized.ToUnity(mirror_z_axis_));
+            return velocityUnit * speed;
+        }
+        return Vector3.zero;
+    }
+
   /** Calculates the normal vector projecting from the hand relative to the controller.
   * @returns A Vector3 representing the vector perpendicular to the palm.
   */

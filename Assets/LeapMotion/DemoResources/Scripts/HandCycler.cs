@@ -28,11 +28,11 @@ public class HandCycler : MonoBehaviour {
   void OnGUI() {
     Event current_event = Event.current;
     if (current_event.type == EventType.KeyDown) {
-      if (current_event.keyCode == KeyCode.LeftArrow) {
+      if (current_event.keyCode == KeyCode.H) {
         hand_index_ = (hand_index_ + leftHands.Length - 1) % leftHands.Length;
         SetNewHands();
       }
-      else if (current_event.keyCode == KeyCode.RightArrow) {
+      else if (current_event.keyCode == KeyCode.J) {
         hand_index_ = (hand_index_ + 1) % leftHands.Length;
         SetNewHands();
       }
