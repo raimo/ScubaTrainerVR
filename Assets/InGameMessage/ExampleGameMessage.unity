@@ -166,14 +166,6 @@ Prefab:
       propertyPath: platform
       value: 
       objectReference: {fileID: 1520237364}
-    - target: {fileID: 13638502, guid: 86f81af66ea63403d826d1b11b6d6753, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11441380, guid: 86f81af66ea63403d826d1b11b6d6753, type: 2}
-      propertyPath: MaxBCDVolume
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86f81af66ea63403d826d1b11b6d6753, type: 2}
   m_IsPrefabParent: 0
@@ -415,6 +407,21 @@ MonoScript:
 GameObject:
   m_PrefabParentObject: {fileID: 100886, guid: 535608151977f43c5843e728e5d81a88, type: 2}
   m_PrefabInternal: {fileID: 180103574}
+--- !u!54 &1520237369
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1520237364}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!82 &1755867102 stripped
 AudioSource:
   m_PrefabParentObject: {fileID: 8281084, guid: ea2da6aa31cf24f6c814bc2e862b238c,
@@ -429,7 +436,7 @@ AudioSource:
 GameObject:
   m_PrefabParentObject: {fileID: 116180, guid: 86f81af66ea63403d826d1b11b6d6753, type: 2}
   m_PrefabInternal: {fileID: 33939389}
---- !u!114 &1872239001
+--- !u!114 &1872239002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -437,12 +444,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1872238991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115fb5bd6d1b946238f9d23773d1eefb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dab918331f7348f68269213ecb4e5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  massFudge: .00999999978
-  rightingForce: 100
-  glideFactor: .200000003
+  normalFogColor: {r: .5, g: .5, b: .5, a: .5}
+  normalFogDensity: .00300000003
+  underwaterFogColor: {r: .810000002, g: .930000007, b: .370000005, a: .5}
+  underwaterFogDensity: .0199999996
+  isUnderwater: 0
 --- !u!82 &2123060262 stripped
 AudioSource:
   m_PrefabParentObject: {fileID: 8269614, guid: ea2da6aa31cf24f6c814bc2e862b238c,
