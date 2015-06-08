@@ -13,14 +13,6 @@ public class InflateAction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isPressed) {
-			Debug.Log("InflateAction");
-			diver.inflateBC ();
-			// TODO do this only after BCD is inflated, now we do it immediately
-			if (diver.isBCDFull () && gameState.state == GameState.State.INFLATE_BCD_ENTIRELY) {
-				StartCoroutine(GoToNextStage());
-			}
-		}
 	}
 
 	private IEnumerator GoToNextStage() {
@@ -31,12 +23,12 @@ public class InflateAction : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
-			isPressed = true;
-		}
-	}
-	void OnTriggerExit(Collider other) {
-		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
-			isPressed = false;
+			Debug.Log("InflateAction");
+			diver.inflateBC ();
+			// TODO do this only after BCD is inflated, now we do it immediately
+			if (diver.isBCDFull () && gameState.state == GameState.State.INFLATE_BCD_ENTIRELY) {
+				StartCoroutine(GoToNextStage());
+			}
 		}
 	}
 }

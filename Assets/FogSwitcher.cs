@@ -23,7 +23,7 @@ public class FogSwitcher : MonoBehaviour {
 
     void Start(){
         depthShaderControls = gameObject.transform.root.GetComponentsInChildren<GlobalFog> ();
-		Debug.Log ("NUMBER OF GLOBAL FOG " + depthShaderControls.Length);
+		Debug.Log ("GLOBAL FOG " + depthShaderControls.Length);
 		cameras = gameObject.transform.root.GetComponentsInChildren<Camera> ();
         waterPlane = GameObject.FindWithTag ("Overwater");
         ambient = GetComponent <AudioSource> ();
@@ -41,10 +41,12 @@ public class FogSwitcher : MonoBehaviour {
                 Vector3 scale = waterPlane.transform.localScale;
                 scale.y = 1;
                 waterPlane.transform.localScale = scale;
+				/*
 				waterPlane.transform.position = new Vector3(
 					waterPlane.transform.position.x,
 					waterPlane.transform.position.y-1,
 					waterPlane.transform.position.z);
+				*/
             }
             foreach (Camera camera in cameras) {
                 camera.clearFlags = CameraClearFlags.Skybox;
@@ -63,10 +65,12 @@ public class FogSwitcher : MonoBehaviour {
             }
             if (waterPlane) {
                 Vector3 scale = waterPlane.transform.localScale;
-				waterPlane.transform.position = new Vector3(
+				/*
+				 * waterPlane.transform.position = new Vector3(
 					waterPlane.transform.position.x,
 					waterPlane.transform.position.y+1,
 					waterPlane.transform.position.z);
+					*/
                 scale.y = -1;
                 waterPlane.transform.localScale = scale;
             }
