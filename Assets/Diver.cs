@@ -226,4 +226,12 @@ public class Diver : MonoBehaviour {
         float delta = (BodyWeight + EquipmentWeight + WeightBelt) - currentBouyancy;
         CurrentBCDVolume += delta * atm;
     }
+
+	void OnTriggerEnter(Collider other) {
+		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
+			Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
+		}
+	}
+
+
 }
