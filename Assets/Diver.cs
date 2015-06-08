@@ -196,7 +196,7 @@ public class Diver : MonoBehaviour {
 			physicsBody.velocity = Vector3.zero;
 			if (gameState.state == GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT) {
                 gameState.AdvanceState (GameState.State.YOURE_AT_THE_BOTTOM);
-                StartCoroutine(GoBackUp());
+				StartCoroutine(FeelTheOcean());
             }
             sound.PlayOneShot (hitBottom, .05f);
             return true;
@@ -204,9 +204,13 @@ public class Diver : MonoBehaviour {
         return false;
     }
 
+	private IEnumerator FeelTheOcean() {
+		yield return new WaitForSeconds(16.0f);
+		gameState.AdvanceState (GameState.State.SIGNAL_ASCENT);
+		StartCoroutine(GoBackUp());
+	}
+
 	private IEnumerator GoBackUp() {
-		yield return new WaitForSeconds(9.0f);
-        gameState.AdvanceState (GameState.State.SIGNAL_ASCENT);
 		yield return new WaitForSeconds(16.0f);
         gameState.AdvanceState (GameState.State.VENT_AIR_FREQUENTLY_DURING_ASCENT);
 	}

@@ -61,7 +61,6 @@ public class FogSwitcher : MonoBehaviour {
             RenderSettings.fogDensity = underwaterFogDensity;
             foreach (GlobalFog depthShaderControl in depthShaderControls) {
                 depthShaderControl.enabled = true;
-                depthShaderControl.height = -transform.position.y;
             }
             if (waterPlane) {
                 Vector3 scale = waterPlane.transform.localScale;
@@ -82,6 +81,11 @@ public class FogSwitcher : MonoBehaviour {
             ambient.loop = false;
             ambient.Play ();
             isUnderwater = true;
+        }
+        if (transform.position.y < -0.78){ //underwater
+            foreach (GlobalFog depthShaderControl in depthShaderControls) {
+                depthShaderControl.height = -transform.position.y;
+            }
         }
 
 		if (transform.position.y < -4 && !ambient.isPlaying) {
