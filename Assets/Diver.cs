@@ -229,7 +229,8 @@ public class Diver : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
-			Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
+			Debug.Log("ignoring " + other.name);
+			Physics.IgnoreCollision(gameObject.GetComponent<Collider>().transform.root.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
 		}
 	}
 
