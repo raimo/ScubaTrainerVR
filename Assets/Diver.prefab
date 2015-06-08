@@ -405,7 +405,7 @@ MonoBehaviour:
   MaxBCDVolume: 40
   BCDFillRate: 40
   CurrentLungVolume: 6
-  CurrentBCDVolume: 0
+  CurrentBCDVolume: 4
   currentBouyancy: 0
   atm: 1
   currentVolume: 0

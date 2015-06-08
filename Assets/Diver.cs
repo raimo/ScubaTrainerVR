@@ -36,6 +36,7 @@ public class Diver : MonoBehaviour {
     private Rigidbody physicsBody = null;
     private CapsuleCollider capsule = null;
     private SwimController swimController = null;
+    private ParticleSystem ambientParticles = null;
 
     //inspection variables
     public float currentBouyancy = 0;
@@ -53,6 +54,7 @@ public class Diver : MonoBehaviour {
         physicsBody.centerOfMass = new Vector3 (0, -1, 0);
         capsule  = gameObject.GetComponent<CapsuleCollider> ();
         swimController = gameObject.GetComponent<SwimController> ();
+        ambientParticles = gameObject.GetComponent<ParticleSystem> ();
         sound = GetComponent<AudioSource> ();
         CurrentLungVolume = MaxLungVolume;
 
@@ -119,6 +121,7 @@ public class Diver : MonoBehaviour {
             gameState.AdvanceState (GameState.State.YOURE_AT_THE_SURFACE);
         }
         sound.Stop ();
+        ambientParticles.Stop();
     }
 
     void SetUnderwater () 
@@ -132,6 +135,7 @@ public class Diver : MonoBehaviour {
             sound.PlayOneShot (splash, .05f);
         }
         sound.Play ();
+        ambientParticles.Play();
     }
 
     public void moveForward(){

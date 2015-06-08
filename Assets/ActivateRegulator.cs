@@ -17,6 +17,8 @@ public class ActivateRegulator : MonoBehaviour {
 	void Update () {
 		if (gameState.state == GameState.State.HOLD_DURING_GIANT_STRIDE && !regulator.active) {
 			regulator.SetActive (true);
-		}
+        } else if (gameState.state == GameState.State.GO_GO && regulator.active) {
+            regulator.SetActive (false);
+        }
 	}
 }
