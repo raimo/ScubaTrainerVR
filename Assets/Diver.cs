@@ -59,13 +59,13 @@ public class Diver : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+        if (isBCDFull())
+            CurrentBCDVolume = MaxBCDVolume * atm;
+
         if (isUnderwater) {
             atm = 1 - (transform.position.y - SeaLevel)/ 10;
             if(atm < 1) atm = 1;
 
-            if (isBCDFull())
-                CurrentBCDVolume = MaxBCDVolume * atm;
-            
             currentVolume = StaticBodyVolume + (CurrentLungVolume + CurrentBCDVolume + MaxWetsuitAirVolume) / atm;
             float currentWeight = BodyWeight + EquipmentWeight + WeightBelt;
             currentBouyancy = currentVolume * WaterWeight;
