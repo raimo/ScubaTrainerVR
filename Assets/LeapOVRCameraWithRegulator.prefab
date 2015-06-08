@@ -88,6 +88,7 @@ GameObject:
   - 81: {fileID: 8133662}
   - 136: {fileID: 13638502}
   - 114: {fileID: 11447172}
+  - 114: {fileID: 11475356}
   m_Layer: 0
   m_Name: LeapOVRCameraWithRegulator
   m_TagString: Untagged
@@ -563,7 +564,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133422}
   m_LocalRotation: {x: .5, y: -.5, z: .49999997, w: .50000006}
-  m_LocalPosition: {x: 0, y: .159999996, z: .74000001}
+  m_LocalPosition: {x: .0540000014, y: .155000001, z: .990999997}
   m_LocalScale: {x: .0199999996, y: .529999971, z: .109999999}
   m_Children:
   - {fileID: 471138}
@@ -673,8 +674,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184812}
   m_LocalRotation: {x: -.500000119, y: .5, z: -.5, w: .49999994}
-  m_LocalPosition: {x: 11.3800001, y: .699999988, z: -1.09000003}
-  m_LocalScale: {x: .0299999993, y: .100000001, z: .100000001}
+  m_LocalPosition: {x: -1.79999995, y: .922999978, z: -.689999998}
+  m_LocalScale: {x: .0281999987, y: .0940000042, z: .0940000042}
   m_Children: []
   m_Father: {fileID: 431136}
   m_RootOrder: 0
@@ -1010,7 +1011,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6d39d9326051d428eb3bbfe5b57a98dc, type: 2}
+  - {fileID: 2159950, guid: 1060c1fbd09ff4a7c884dee0b8bdb836, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1864,6 +1865,22 @@ MonoBehaviour:
   - {fileID: 173344}
   - {fileID: 126176}
   toggle: 116
+--- !u!114 &11475356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dab918331f7348f68269213ecb4e5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalFogColor: {r: .5, g: .5, b: .5, a: .5}
+  normalFogDensity: .00300000003
+  underwaterFogColor: {r: .810000002, g: .930000007, b: .370000005, a: .5}
+  underwaterFogDensity: .0199999996
+  isUnderwater: 0
 --- !u!114 &11484038
 MonoBehaviour:
   m_ObjectHideFlags: 1
