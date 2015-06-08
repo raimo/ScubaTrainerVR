@@ -9,6 +9,7 @@ public class SwimController : MonoBehaviour {
     public float massFudge = .01f;
     public float rightingForce = 100;
     public float glideFactor = .2f;
+    public float airSuppressor = 1.0f;
 
 	void Start () {
         handController = GetComponentInChildren<HandController> ();
@@ -19,10 +20,13 @@ public class SwimController : MonoBehaviour {
         if (handController && physicsBody) {
             HandModel[] hands = handController.GetAllPhysicsHands ();
             foreach (HandModel hand in hands) {
-                Vector3 velocity = hand.GetPalmVelocity ();
-                Vector3 normal = hand.GetPalmNormal ();
-                Vector3 swimVelocity = -Vector3.Dot (velocity, normal) * normal.normalized * Time.deltaTime * massFudge;
-                physicsBody.AddForceAtPosition (swimVelocity, hand.transform.position, ForceMode.Acceleration);
+                Vector3 position = hand.GetPalmPosition ();
+                if (position.y < 0) {
+                    Vector3 velocity = hand.GetPalmVelocity ();
+                    Vector3 normal = hand.GetPalmNormal ();
+                    Vector3 swimVelocity = -Vector3.Dot (velocity, normal) * normal.normalized * Time.deltaTime * massFudge;
+                    physicsBody.AddForceAtPosition (swimVelocity, hand.transform.position, ForceMode.Acceleration);
+                }
             }
         }
         if (Vector3.Dot (transform.up, Vector3.up) < 1.0) {
@@ -33,7 +37,7 @@ public class SwimController : MonoBehaviour {
         totalVelocity = physicsBody.velocity * glideFactor;
 
         if (transform.position.y > 0) {
-            physicsBody.velocity = new Vector3 (physicsBody.velocity.x, physicsBody.velocity.y * .6f, physicsBody.velocity.z);
+            physicsBody.velocity = new Vector3 (physicsBody.velocity.x, physicsBody.velocity.y * airSuppressor, physicsBody.velocity.z);
         }
 	}
 }

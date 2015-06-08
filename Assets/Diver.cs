@@ -7,6 +7,12 @@ public class Diver : MonoBehaviour {
     private bool isFloating = false;
 
     public float SeaLevel = 0;
+    public AudioClip hitBottom = null;
+    public AudioClip surface = null;
+    public AudioClip deflate = null;
+    public AudioClip inflate = null;
+    public AudioClip splash = null;
+    private AudioSource sound = null;
 
     public float WaterWeight = 1.02f; //Kg/Litre
     public float BodyWeight = 86f; //kilograms
@@ -43,11 +49,11 @@ public class Diver : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //bouyancy = gameObject.GetComponent<ConstantForce> ();
         physicsBody = gameObject.GetComponent<Rigidbody> ();
         physicsBody.centerOfMass = new Vector3 (0, -1, 0);
         capsule  = gameObject.GetComponent<CapsuleCollider> ();
         swimController = gameObject.GetComponent<SwimController> ();
+        sound = GetComponent<AudioSource> ();
         CurrentLungVolume = MaxLungVolume;
 
 	}
@@ -107,23 +113,25 @@ public class Diver : MonoBehaviour {
     {
         //Debug.Log("Normal");
         physicsBody.useGravity = true;
-        swimController.rightingForce = 250;
+        swimController.airSuppressor = .7f;
         isFloating = true;
         if (gameState.state == GameState.State.VENT_AIR_FREQUENTLY_DURING_ASCENT) {
             gameState.AdvanceState (GameState.State.YOURE_AT_THE_SURFACE);
         }
-
+        sound.Stop ();
     }
 
     void SetUnderwater () 
     {
         //Debug.Log("Underwater");
         isSwimming = true;
-        swimController.rightingForce = 150;
         physicsBody.useGravity = false;
+        swimController.airSuppressor = 1.0f;
         if (gameState.state == GameState.State.GO_GO) {
             gameState.AdvanceState (GameState.State.VENT_BCD_A_BIT_TO_START_DESCENT);
+            sound.PlayOneShot (splash, .05f);
         }
+        sound.Play ();
     }
 
     public void moveForward(){
@@ -148,13 +156,15 @@ public class Diver : MonoBehaviour {
         CurrentBCDVolume += BCDFillRate * Time.deltaTime;
         if (CurrentBCDVolume / atm > MaxBCDVolume)
             CurrentBCDVolume = MaxBCDVolume * atm;
-        
+        sound.PlayOneShot (inflate, .05f);
+
     }
 
     public void deflateBC(){
         CurrentBCDVolume -= BCDFillRate * Time.deltaTime;
         if (CurrentBCDVolume < 0)
             CurrentBCDVolume = 0;
+        sound.PlayOneShot (deflate, .05f);
         isFloating = false;
     }
 
@@ -182,6 +192,7 @@ public class Diver : MonoBehaviour {
                 gameState.AdvanceState (GameState.State.YOURE_AT_THE_BOTTOM);
                 StartCoroutine(GoBackUp());
             }
+            sound.PlayOneShot (hitBottom, .05f);
             return true;
         }
         return false;
@@ -196,6 +207,7 @@ public class Diver : MonoBehaviour {
 
     public bool AtSurface(){
         if (transform.position.y > SeaLevel - 1) {
+            sound.PlayOneShot (surface, .05f);
             return true;
         }
         return false;
