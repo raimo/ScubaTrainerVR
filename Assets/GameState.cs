@@ -33,6 +33,7 @@ public class GameState : MonoBehaviour {
     public AudioSource failure;
 
 	public GameObject platform;
+	public Rigidbody playerBody;
 
 	private Dictionary<State, string> stateMessages = new Dictionary<State, string>	{
 		{State.INFLATE_BCD_ENTIRELY,
@@ -91,6 +92,7 @@ public class GameState : MonoBehaviour {
 			holdDuringGiantStride.Play ();
 		} else if (state == State.GO_GO) {
 			platform.SetActive(false);
+			playerBody.isKinematic = false;
 			goGo.Play ();
 		} else if (state == State.VENT_BCD_A_BIT_TO_START_DESCENT) {
 			ventBcdABitToStartDescent.Play ();

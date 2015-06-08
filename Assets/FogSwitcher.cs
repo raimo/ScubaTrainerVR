@@ -22,12 +22,14 @@ public class FogSwitcher : MonoBehaviour {
     private ParticleSystem bubbleMaker = null;
 
     void Start(){
-        depthShaderControls = GetComponentsInParent<GlobalFog> ();
-        cameras = GetComponentsInParent<Camera> ();
+        depthShaderControls = gameObject.transform.root.GetComponentsInChildren<GlobalFog> ();
+		Debug.Log ("NUMBER OF GLOBAL FOG " + depthShaderControls.Length);
+		cameras = gameObject.transform.root.GetComponentsInChildren<Camera> ();
         waterPlane = GameObject.FindWithTag ("Overwater");
         ambient = GetComponent <AudioSource> ();
         bubbleMaker = GetComponent <ParticleSystem> ();
     }
+
     void Update() {
         if (transform.position.y >= 0 && isUnderwater) { //overwater
             RenderSettings.fogColor = normalFogColor;
@@ -39,6 +41,10 @@ public class FogSwitcher : MonoBehaviour {
                 Vector3 scale = waterPlane.transform.localScale;
                 scale.y = 1;
                 waterPlane.transform.localScale = scale;
+				waterPlane.transform.position = new Vector3(
+					waterPlane.transform.position.x,
+					waterPlane.transform.position.y-1,
+					waterPlane.transform.position.z);
             }
             foreach (Camera camera in cameras) {
                 camera.clearFlags = CameraClearFlags.Skybox;
@@ -47,7 +53,8 @@ public class FogSwitcher : MonoBehaviour {
             ambient.loop = true;
             ambient.Play ();
             isUnderwater = false;
-        } else if (transform.position.y < 0 && !isUnderwater){ //underwater
+			// -0.7 .. -0.8
+        } else if (transform.position.y < -0.78 && !isUnderwater){ //underwater
             RenderSettings.fogColor = underwaterFogColor;
             RenderSettings.fogDensity = underwaterFogDensity;
             foreach (GlobalFog depthShaderControl in depthShaderControls) {
@@ -56,6 +63,10 @@ public class FogSwitcher : MonoBehaviour {
             }
             if (waterPlane) {
                 Vector3 scale = waterPlane.transform.localScale;
+				waterPlane.transform.position = new Vector3(
+					waterPlane.transform.position.x,
+					waterPlane.transform.position.y+1,
+					waterPlane.transform.position.z);
                 scale.y = -1;
                 waterPlane.transform.localScale = scale;
             }
@@ -69,7 +80,7 @@ public class FogSwitcher : MonoBehaviour {
             isUnderwater = true;
         }
 
-        if (isUnderwater && !ambient.isPlaying) {
+		if (transform.position.y < -4 && !ambient.isPlaying) {
             ambient.Play ();
             bubbleMaker.Play ();
         }
