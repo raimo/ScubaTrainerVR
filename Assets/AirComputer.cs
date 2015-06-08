@@ -12,7 +12,6 @@ public class AirComputer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("diver.transform.position.y =  " + diver.transform.position.y);
 		decimal depthM = Math.Round (Convert.ToDecimal (diver.transform.position.y), 1);
 		decimal depthFt = Math.Round (Convert.ToDecimal (diver.transform.position.y * 3.28084), 1);
 		decimal rateM = Math.Round (Convert.ToDecimal (diver.ascentRate), 1);
