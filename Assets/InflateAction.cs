@@ -18,10 +18,16 @@ public class InflateAction : MonoBehaviour {
 			diver.inflateBC ();
 			// TODO do this only after BCD is inflated, now we do it immediately
 			if (diver.isBCDFull () && gameState.state == GameState.State.INFLATE_BCD_ENTIRELY) {
-				gameState.AdvanceState (GameState.State.HOLD_DURING_GIANT_STRIDE);
+				StartCoroutine(GoToNextStage());
 			}
 		}
 	}
+
+	private IEnumerator GoToNextStage() {
+		yield return new WaitForSeconds(3.0f);
+		gameState.AdvanceState (GameState.State.HOLD_DURING_GIANT_STRIDE);
+	}
+
 
 	void OnTriggerEnter(Collider other) {
 		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
