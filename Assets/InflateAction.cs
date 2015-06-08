@@ -4,21 +4,39 @@ using System.Collections;
 public class InflateAction : MonoBehaviour {	
 	public GameState gameState;
 	public Diver diver;
+	bool isPressed;
 
 	// Use this for initialization
 	void Start () {
+		isPressed = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (isPressed) {
+			Debug.Log("InflateAction");
+			diver.inflateBC ();
+			// TODO do this only after BCD is inflated, now we do it immediately
+			if (diver.isBCDFull () && gameState.state == GameState.State.INFLATE_BCD_ENTIRELY) {
+				StartCoroutine(GoToNextStage());
+			}
+		}
 	}
 
+	private IEnumerator GoToNextStage() {
+		yield return new WaitForSeconds(3.0f);
+		gameState.AdvanceState (GameState.State.HOLD_DURING_GIANT_STRIDE);
+	}
+
+
 	void OnTriggerEnter(Collider other) {
-		diver.inflateBC ();
-		// TODO do this only after BCD is inflated, now we do it immediately
-		if (diver.isBCDFull() && (other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone")) && gameState.state == GameState.State.INFLATE_BCD_ENTIRELY) {
-			gameState.AdvanceState (GameState.State.HOLD_DURING_GIANT_STRIDE);
+		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
+			isPressed = true;
+		}
+	}
+	void OnTriggerExit(Collider other) {
+		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
+			isPressed = false;
 		}
 	}
 }

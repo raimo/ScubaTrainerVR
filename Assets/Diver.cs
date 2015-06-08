@@ -65,13 +65,13 @@ public class Diver : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+        if (isBCDFull())
+            CurrentBCDVolume = MaxBCDVolume * atm;
+
         if (isUnderwater) {
             atm = 1 - (transform.position.y - SeaLevel)/ 10;
             if(atm < 1) atm = 1;
 
-            if (isBCDFull())
-                CurrentBCDVolume = MaxBCDVolume * atm;
-            
             currentVolume = StaticBodyVolume + (CurrentLungVolume + CurrentBCDVolume + MaxWetsuitAirVolume) / atm;
             float currentWeight = BodyWeight + EquipmentWeight + WeightBelt;
             currentBouyancy = currentVolume * WaterWeight;
@@ -238,4 +238,13 @@ public class Diver : MonoBehaviour {
         float delta = (BodyWeight + EquipmentWeight + WeightBelt) - currentBouyancy;
         CurrentBCDVolume += delta * atm;
     }
+
+	void OnTriggerEnter(Collider other) {
+		if ((other.name.StartsWith ("palm") || other.name.StartsWith ("forearm") || other.name.StartsWith ("bone"))) {
+			Debug.Log("ignoring " + other.name);
+			Physics.IgnoreCollision(gameObject.GetComponent<Collider>().transform.root.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
+		}
+	}
+
+
 }
