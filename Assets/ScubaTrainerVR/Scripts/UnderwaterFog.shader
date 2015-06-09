@@ -116,6 +116,24 @@ CGINCLUDE
 		return g;
 	}
 
+		half3 rgb2hsv(half3 c)
+	{
+	    half4 K = half4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+	    half4 p = lerp(half4(c.bg, K.wz), half4(c.gb, K.xy), step(c.b, c.g));
+	    half4 q = lerp(half4(p.xyw, c.r), half4(c.r, p.yzx), step(p.x, c.r));
+
+	    float d = q.x - min(q.w, q.y);
+	    float e = 1.0e-10;
+	    return half3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+	}
+
+	half3 hsv2rgb(half3 c)
+	{
+	    half4 K = half4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	    half3 p = abs(frac(c.xxx + K.xyz) * 6.0 - K.www);
+	    return c.z * lerp(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+	}
+
 	half4 ComputeFog (v2f i, bool distance, bool height) : SV_Target
 	{
 		half4 sceneColor = tex2D(_MainTex, i.uv);
@@ -142,24 +160,30 @@ CGINCLUDE
 			fogFac = 1.0;
 		//return fogFac; // for debugging
 		
-		// Lerp between fog color & original scene color
-		// by fog amount
 
-
-		half redAttenuation = 1.0;
-		half greenAttenuation = 1.0;
-		half blueAttenuation = 1.0;
-
+		//lerp colors toward blue target color by distance
+		// and darken by depth
 		float uwDistance = ComputeDistance (wsDir, dpth)/100;
-		if(distance){
-		    redAttenuation = clamp(1 - .3 * uwDistance, 0, 1);
-		    greenAttenuation = clamp(1 - .08 * uwDistance, 0, 1);
-		    blueAttenuation = clamp(1 - .01 * uwDistance, 0, 1);
-		}
-		half4 attenuation = half4(redAttenuation, greenAttenuation, blueAttenuation, 1.0)/height;
-		return lerp(sceneColor, half4(.1, .1, 0.1, 1.0), waterDepth/320) * attenuation;
+		uwDistance = clamp(uwDistance, 0, 1);
+		float depthAttenuator = 1 - clamp(waterDepth/150, 0, 1);
+
+		half blueTarget = .56;
+
+		half3 hsvColor = rgb2hsv(sceneColor.rgb) * half3(1.0, 1.0, 1.0);
+		if(hsvColor.r < blueTarget)
+			hsvColor.r = lerp(hsvColor.r, blueTarget, uwDistance);
+		if(hsvColor.r > blueTarget)
+			hsvColor.r = lerp(blueTarget, hsvColor.r, uwDistance);
+		hsvColor.b *= depthAttenuator;
+
+		half3 rgbColor = hsv2rgb(hsvColor);
+		sceneColor = half4(rgbColor.rgb, sceneColor.a);
+
+		//return lerp(sceneColor, half4(.1, .1, 0.1, 1.0), depthAttenuator);
+		//return sceneColor;
 		return lerp (unity_FogColor, sceneColor, fogFac);
 	}
+
 
 ENDCG
 
