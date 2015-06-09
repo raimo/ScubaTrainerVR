@@ -160,16 +160,12 @@ CGINCLUDE
 			fogFac = 1.0;
 		//return fogFac; // for debugging
 		
-		// Lerp between fog color & original scene color
-		// by fog amount
 
+		//lerp colors toward blue target color by distance
+		// and darken by depth
 		float uwDistance = ComputeDistance (wsDir, dpth)/100;
 		uwDistance = clamp(uwDistance, 0, 1);
-		float depthAttenuator = 1 - clamp(waterDepth/350, 0, 1);
-
-		half redAttenuation = 1.0;
-		half greenAttenuation = 1.0;
-		half blueAttenuation = 1.0;
+		float depthAttenuator = 1 - clamp(waterDepth/150, 0, 1);
 
 		half blueTarget = .56;
 
@@ -178,7 +174,7 @@ CGINCLUDE
 			hsvColor.r = lerp(hsvColor.r, blueTarget, uwDistance);
 		if(hsvColor.r > blueTarget)
 			hsvColor.r = lerp(blueTarget, hsvColor.r, uwDistance);
-		hsvColor.b *= i.uv.y * depthAttenuator;
+		hsvColor.b *= depthAttenuator;
 
 		half3 rgbColor = hsv2rgb(hsvColor);
 		sceneColor = half4(rgbColor.rgb, sceneColor.a);
