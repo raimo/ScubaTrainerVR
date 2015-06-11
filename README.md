@@ -6,4 +6,11 @@ Leap Motion Tracking Version 2.2.6 required.
 Built with Oculus Rift 0.5.0.1 SDK.
 Tested with OS X and Unity 5.
 
+## Objective
+
+Follow the instructions on the blue background. You'll be lead to put on the regulator and dive to the bottom and back up.
+Try to remain between -5 and -10 descent rate and 5 and 10 ascent rate (for real practice).
+
+## License
+
 Licensed subject to [Leap Motion SDK Agreement](https://central.leapmotion.com/agreements/SdkAgreement).
